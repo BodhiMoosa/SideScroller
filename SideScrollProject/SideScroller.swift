@@ -13,6 +13,7 @@ protocol SideScrollerDelegate : class {
 }
 
 class SideScroller: UIScrollView {
+    var startUp                 = false
     weak var sideScrollDelegate : SideScrollerDelegate!
     var stackView               : UIStackView!
     var lineView                = UIView()
@@ -72,9 +73,9 @@ class SideScroller: UIScrollView {
         }
         spacing                                                                         = UIView()
         spacing.widthAnchor.constraint(equalToConstant: (screenWidth / 2) - 4).isActive = true
-        stackView.addArrangedSubview(spacing)
         stackView.arrangedSubviews[selectedNumber + 1].backgroundColor                  = .systemRed
-    
+        stackView.addArrangedSubview(spacing)
+
         addSubview(stackView)
     }
 
@@ -134,10 +135,3 @@ extension SideScroller : UIScrollViewDelegate {
     }
 }
 
-extension ClosedRange {
-    func clamp(_ value : Bound) -> Bound {
-        return self.lowerBound > value ? self.lowerBound
-            : self.upperBound < value ? self.upperBound
-            : value
-    }
-}

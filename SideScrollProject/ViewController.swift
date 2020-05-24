@@ -18,6 +18,13 @@ class ViewController: UIViewController {
         configure()
     }
     
+    override func viewDidLayoutSubviews() {
+        if !scrollView.startUp {
+            scrollView.setContentOffset(CGPoint(x: scrollView.totalStackViewWidth / 2, y: 0), animated: false)
+            scrollView.startUp = true
+        }
+    }
+    
     private func configure() {
         view.backgroundColor                            = .systemBackground
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +33,6 @@ class ViewController: UIViewController {
         view.addSubview(label)
         scrollView                      = SideScroller(startNumber: 100, endNumber: 400)
         scrollView.sideScrollDelegate   = self
-        valueIsUpdated(currentNumberSelection: 100) 
         view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([
