@@ -9,11 +9,7 @@
 import UIKit
 
 protocol SideScrollerDelegate : class {
-    func valueIsUpdated(currentNumberSelection: Int)
-    func setStartValue() -> Int
-    func setEndValue() -> Int
-
-    
+    func valueIsUpdated(currentNumberSelection: Int)    
 }
 
 class SideScroller: UIScrollView {
@@ -23,14 +19,12 @@ class SideScroller: UIScrollView {
     var spacing                 : UIView!
     var screenWidth             : CGFloat!
     var screenHeight            : CGFloat!
-    var distanceBetweenPoints   : CGFloat!
     var selectedNumber          : Int!
     let generator               = UISelectionFeedbackGenerator()
     var startNumber             : Int!
     var endNumber               : Int!
     var totalStackViewWidth     : CGFloat!
     var stackSpacing            : CGFloat!
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,15 +36,12 @@ class SideScroller: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(startNumber: Int, endNumber: Int, selectedNumber: Int) {
+    init(startNumber: Int, endNumber: Int) {
+        super.init(frame: .zero)
         self.startNumber    = startNumber
         self.endNumber      = endNumber
-        self.selectedNumber = selectedNumber
-        super.init(frame: .zero)
         configureStackView()
         configure()
-        setContentOffset(CGPoint(x: selectedNumber, y: 0), animated: false)
-        print(contentOffset)
     }
     
     private func configureStackView() {
@@ -75,26 +66,21 @@ class SideScroller: UIScrollView {
             } else {
                 lineView.heightAnchor.constraint(equalToConstant: screenHeight * 0.03).isActive = true
             }
-            lineView.widthAnchor.constraint(equalToConstant: 1).isActive = true
-            lineView.backgroundColor = .systemGray
+            lineView.widthAnchor.constraint(equalToConstant: 1).isActive    = true
+            lineView.backgroundColor                                        = .systemGray
             stackView.addArrangedSubview(lineView)
         }
-        spacing = UIView()
+        spacing                                                                         = UIView()
         spacing.widthAnchor.constraint(equalToConstant: (screenWidth / 2) - 4).isActive = true
         stackView.addArrangedSubview(spacing)
-        stackView.arrangedSubviews[selectedNumber + 1].backgroundColor = .systemRed
+        stackView.arrangedSubviews[selectedNumber + 1].backgroundColor                  = .systemRed
     
         addSubview(stackView)
-
-        
     }
 
-    
     private func configure() {
-        distanceBetweenPoints   = (2000 - screenWidth) / CGFloat(endNumber)
-        stackSpacing            = screenWidth * 0.0096
-        totalStackViewWidth     = (stackSpacing * CGFloat(endNumber)) + screenWidth
-        
+        stackSpacing                                    = screenWidth * 0.02
+        totalStackViewWidth                             = (stackSpacing * CGFloat(endNumber - startNumber)) + screenWidth
         delegate                                        = self
         alwaysBounceHorizontal                          = true
         translatesAutoresizingMaskIntoConstraints       = false
@@ -110,37 +96,41 @@ class SideScroller: UIScrollView {
         ])
         
     }
-    
-    
 }
-
-
 
 extension SideScroller : UIScrollViewDelegate {
         
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.contentOffset.y  = 0
         let currentNumber           = Int((scrollView.contentOffset.x / stackSpacing).rounded())
-        if selectedNumber == currentNumber {
+        scrollView.contentOffset.y  = 0
+        
+        if selectedNumber == currentNumber { // if the movement isn't enough to go to next, return
+            if selectedNumber == startNumber {
+                stackView.arrangedSubviews[selectedNumber].backgroundColor = .systemGray
+                stackView.arrangedSubviews[selectedNumber + 1].backgroundColor = .systemRed
+                sideScrollDelegate.valueIsUpdated(currentNumberSelection: selectedNumber * 2)
+            }
             return
         } else {
-            selectedNumber = currentNumber < 0 ? 0 : currentNumber
-            generator.selectionChanged()
-            selectedNumber = (startNumber ... endNumber).clamp(selectedNumber)
-
+            print(currentNumber)
+            print(selectedNumber)
+            selectedNumber = (startNumber ... endNumber).clamp(currentNumber)
         }
+
         for x in stackView.arrangedSubviews {
             x.backgroundColor = .systemGray
         }
-        if selectedNumber <= startNumber {
+        if currentNumber <= 0 {
             stackView.arrangedSubviews[1].backgroundColor = .systemRed
-        } else if selectedNumber >= endNumber + 1 {
-            stackView.arrangedSubviews[endNumber + 1].backgroundColor = .systemRed
+            sideScrollDelegate.valueIsUpdated(currentNumberSelection: startNumber)
+        } else if currentNumber > endNumber - startNumber {
+            stackView.arrangedSubviews[(endNumber - startNumber) + 1].backgroundColor = .systemRed
+            sideScrollDelegate.valueIsUpdated(currentNumberSelection: endNumber)
         } else {
-            stackView.arrangedSubviews[selectedNumber + 1].backgroundColor = .systemRed
+            generator.selectionChanged()
+            stackView.arrangedSubviews[currentNumber + 1].backgroundColor = .systemRed
+            sideScrollDelegate?.valueIsUpdated(currentNumberSelection: startNumber + currentNumber)
         }
-        sideScrollDelegate.valueIsUpdated(currentNumberSelection: selectedNumber)
-        
     }
 }
 

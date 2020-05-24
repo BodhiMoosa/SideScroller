@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var label = UILabel()
-    var scrollView : SideScroller!
-    var button = UIButton()
+    var label       = UILabel()
+    var scrollView  : SideScroller!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,8 @@ class ViewController: UIViewController {
 
 
     }
+    
+
 
     private func configure() {
         view.backgroundColor                            = .systemBackground
@@ -27,17 +29,10 @@ class ViewController: UIViewController {
         label.textColor                                 = .label
         label.text                                      = "Test"
         view.addSubview(label)
-        scrollView = SideScroller()
-        scrollView.sideScrollDelegate = self
-
+        scrollView                      = SideScroller(startNumber: 100, endNumber: 400)
+        scrollView.sideScrollDelegate   = self
+        valueIsUpdated(currentNumberSelection: 100) 
         view.addSubview(scrollView)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("test", for: .normal)
-        button.backgroundColor = .systemRed
-        button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
-
-        view.addSubview(button)
         
         NSLayoutConstraint.activate([
             
@@ -50,37 +45,16 @@ class ViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 0),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
             
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            button.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            button.heightAnchor.constraint(equalToConstant: 40)
         ])
-        
-    }
-    
-    @objc private func buttonTap() {
-        scrollView.setContentOffset(CGPoint(x: 30, y: 0), animated: true)
     }
 }
 
 
-
 extension ViewController : SideScrollerDelegate {
-    func setStartValue() -> Int {
-        return 10
-    }
-    
-    func setEndValue() -> Int {
-        return 100
-    }
-    
-    
     func valueIsUpdated(currentNumberSelection: Int) {
-        label.text = String(currentNumberSelection) + "lbs"
+        label.text = "\(currentNumberSelection)" + " lbs"
     }
-    
-
 }
 
