@@ -85,6 +85,8 @@ class SideScroller: UIScrollView {
         alwaysBounceHorizontal                          = true
         translatesAutoresizingMaskIntoConstraints       = false
         backgroundColor                                 = .systemBackground
+        showsVerticalScrollIndicator                    = false
+        showsHorizontalScrollIndicator                  = false
         
         NSLayoutConstraint.activate([
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -112,9 +114,7 @@ extension SideScroller : UIScrollViewDelegate {
             }
             return
         } else {
-            print(currentNumber)
-            print(selectedNumber)
-            selectedNumber = (startNumber ... endNumber).clamp(currentNumber)
+            selectedNumber = currentNumber
         }
 
         for x in stackView.arrangedSubviews {

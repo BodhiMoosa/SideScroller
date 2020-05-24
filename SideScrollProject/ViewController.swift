@@ -12,17 +12,12 @@ class ViewController: UIViewController {
     
     var label       = UILabel()
     var scrollView  : SideScroller!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-
-
     }
     
-
-
     private func configure() {
         view.backgroundColor                            = .systemBackground
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +30,6 @@ class ViewController: UIViewController {
         view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            
             
             label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -50,7 +44,6 @@ class ViewController: UIViewController {
         ])
     }
 }
-
 
 extension ViewController : SideScrollerDelegate {
     func valueIsUpdated(currentNumberSelection: Int) {
