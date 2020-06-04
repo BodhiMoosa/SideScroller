@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB789960247B62F30076ADAC /* CollectionMethodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB78995F247B62F30076ADAC /* CollectionMethodVC.swift */; };
+		AB789962247B64670076ADAC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB789961247B64670076ADAC /* CollectionViewCell.swift */; };
 		AB9800472478BC9D009EDB3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9800462478BC9D009EDB3D /* AppDelegate.swift */; };
 		AB9800492478BC9D009EDB3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9800482478BC9D009EDB3D /* SceneDelegate.swift */; };
 		AB98004B2478BC9D009EDB3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98004A2478BC9D009EDB3D /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB78995F247B62F30076ADAC /* CollectionMethodVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionMethodVC.swift; sourceTree = "<group>"; };
+		AB789961247B64670076ADAC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		AB9800432478BC9D009EDB3D /* SideScrollProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9800462478BC9D009EDB3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB9800482478BC9D009EDB3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				AB9800462478BC9D009EDB3D /* AppDelegate.swift */,
 				AB9800482478BC9D009EDB3D /* SceneDelegate.swift */,
 				AB98005A2478BD26009EDB3D /* SideScroller.swift */,
+				AB78995F247B62F30076ADAC /* CollectionMethodVC.swift */,
+				AB789961247B64670076ADAC /* CollectionViewCell.swift */,
 				AB98004A2478BC9D009EDB3D /* ViewController.swift */,
 				AB98004F2478BC9F009EDB3D /* Assets.xcassets */,
 				AB9800512478BC9F009EDB3D /* LaunchScreen.storyboard */,
@@ -139,6 +145,8 @@
 			files = (
 				AB98005B2478BD26009EDB3D /* SideScroller.swift in Sources */,
 				AB98004B2478BC9D009EDB3D /* ViewController.swift in Sources */,
+				AB789962247B64670076ADAC /* CollectionViewCell.swift in Sources */,
+				AB789960247B62F30076ADAC /* CollectionMethodVC.swift in Sources */,
 				AB9800472478BC9D009EDB3D /* AppDelegate.swift in Sources */,
 				AB9800492478BC9D009EDB3D /* SceneDelegate.swift in Sources */,
 			);

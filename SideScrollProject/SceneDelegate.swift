@@ -17,10 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene                                   = (scene as? UIWindowScene) else { return }
         window                                                  = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene                                     = windowScene
-        window?.rootViewController                              = ViewController()
+        window?.rootViewController                              = createTabs()
         window?.makeKeyAndVisible()
     }
 
+    func createTabs() -> UITabBarController {
+        let vc = UITabBarController()
+        vc.viewControllers = [CollectionMethodVC(), ViewController()]
+        return vc
+    }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
