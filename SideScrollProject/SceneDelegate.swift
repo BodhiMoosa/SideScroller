@@ -23,7 +23,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func createTabs() -> UITabBarController {
         let vc = UITabBarController()
-        vc.viewControllers = [CollectionMethodVC(), ViewController()]
+        vc.viewControllers = [createSecondApproachVC(), createFirstApproachVC()]
+        return vc
+    }
+    
+    private func createSecondApproachVC() -> UIViewController {
+        let vc = ViewController()
+        vc.title = "StackView Test"
+        return vc
+    }
+    
+    private func createFirstApproachVC() -> UIViewController {
+        let vc = CollectionMethodVC()
+        vc.title = "CollectionView Test"
         return vc
     }
     func sceneDidDisconnect(_ scene: UIScene) {

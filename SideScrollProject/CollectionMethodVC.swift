@@ -16,6 +16,7 @@ class CollectionMethodVC: UIViewController {
     var numberOfLines       = 201
     var spacing : CGFloat   = 5
     var currentSelected     : CGFloat!
+    var label               : UILabel!
     
 
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class CollectionMethodVC: UIViewController {
         collectionView.dataSource                                   = self
         collectionView.translatesAutoresizingMaskIntoConstraints    = false
         collectionView.backgroundColor                              = .systemBackground
+        collectionView.showsHorizontalScrollIndicator               = false
 
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.reuseID)
         view.addSubview(collectionView)
@@ -46,6 +48,17 @@ class CollectionMethodVC: UIViewController {
         ])
         
         
+        label                                           = UILabel()
+        label.textAlignment                             = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalToConstant: 100),
+            label.heightAnchor.constraint(equalToConstant: 50),
+            label.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
+            label.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor)
+        ])
         
         
     }
@@ -104,7 +117,7 @@ extension CollectionMethodVC : UICollectionViewDelegate, UICollectionViewDataSou
             }
             let cell = collectionView.cellForItem(at: (IndexPath(row: Int(currentSelected) + 1, section: 0))) as! CollectionViewCell
             cell.backgroundColor = .red
-            print(currentSelected)
+            label.text = String(describing: currentSelected!)
     }
     
 }

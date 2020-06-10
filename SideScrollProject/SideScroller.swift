@@ -67,13 +67,13 @@ class SideScroller: UIScrollView {
             } else {
                 lineView.heightAnchor.constraint(equalToConstant: screenHeight * 0.03).isActive = true
             }
-            lineView.widthAnchor.constraint(equalToConstant: 1).isActive    = true
-            lineView.backgroundColor                                        = .systemGray
+            lineView.widthAnchor.constraint(equalToConstant: 1).isActive                        = true
+            lineView.backgroundColor                                                            = .systemGray
             stackView.addArrangedSubview(lineView)
         }
-        spacing                                                                         = UIView()
-        spacing.widthAnchor.constraint(equalToConstant: (screenWidth / 2) - 4).isActive = true
-        stackView.arrangedSubviews[selectedNumber + 1].backgroundColor                  = .systemRed
+        spacing                                                                                 = UIView()
+        spacing.widthAnchor.constraint(equalToConstant: (screenWidth / 2) - 4).isActive         = true
+        stackView.arrangedSubviews[selectedNumber + 1].backgroundColor                          = .systemRed
         stackView.addArrangedSubview(spacing)
 
         addSubview(stackView)
