@@ -109,8 +109,8 @@ extension SideScroller : UIScrollViewDelegate {
         
         if selectedNumber == currentNumber { // if the movement isn't enough to go to next, return
             if selectedNumber == startNumber {
-                stackView.arrangedSubviews[selectedNumber].backgroundColor = .systemGray
-                stackView.arrangedSubviews[selectedNumber + 1].backgroundColor = .systemRed
+                stackView.arrangedSubviews[selectedNumber].backgroundColor      = .systemGray
+                stackView.arrangedSubviews[selectedNumber + 1].backgroundColor  = .systemRed
                 sideScrollDelegate.valueIsUpdated(currentNumberSelection: selectedNumber * 2)
             }
             return
